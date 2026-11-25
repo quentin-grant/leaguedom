@@ -1,3 +1,4 @@
+
 /* =========================================
    LEAGUEDOM.
    Global Design System
@@ -338,7 +339,7 @@ section {
     letter-spacing: -2px;
 }
 
-.closing-content > p:not(.eyebrow):not(.closing-welcome) {
+.closing-content > p:not(.eyebrow):not(.closing-welcome):not(.founder-bio) {
     max-width: 700px;
     margin: 0 auto;
 
@@ -355,6 +356,21 @@ section {
     font-size: 1.1rem;
     font-weight: 800;
     letter-spacing: 4px;
+}
+
+/* FOUNDER BIOGRAPHY */
+
+.closing-content > p.founder-bio {
+    max-width: 760px;
+    margin: 0 auto 22px;
+
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 2;
+}
+
+.closing-content > p.founder-bio:last-of-type {
+    margin-bottom: 0;
 }
 
 
@@ -477,3 +493,4 @@ section {
     }
 
 }
+
