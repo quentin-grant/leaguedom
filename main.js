@@ -1,3 +1,4 @@
+
 /* =========================================
    LEAGUEDOM.
    Main JavaScript
@@ -25,18 +26,33 @@ const navigationLinks = document.querySelectorAll(
     '.nav-links a[href^="#"], .logo[href^="#"], .footer-logo[href^="#"]'
 );
 
+const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+);
+
 navigationLinks.forEach((link) => {
 
     link.addEventListener("click", (event) => {
 
         const targetId = link.getAttribute("href");
-        const targetSection = document.querySelector(targetId);
+
+        if (!targetId || targetId === "#") {
+            return;
+        }
+
+        let targetSection;
+
+        try {
+            targetSection = document.querySelector(targetId);
+        } catch (error) {
+            return;
+        }
 
         if (targetSection) {
             event.preventDefault();
 
             targetSection.scrollIntoView({
-                behavior: "smooth",
+                behavior: reducedMotion.matches ? "auto" : "smooth",
                 block: "start"
             });
         }
@@ -100,7 +116,13 @@ const revealElements = document.querySelectorAll(
     ".section-heading, .philosophy-content, .pillar-card, .closing-content"
 );
 
-if ("IntersectionObserver" in window) {
+if (reducedMotion.matches) {
+
+    revealElements.forEach((element) => {
+        element.classList.add("visible");
+    });
+
+} else if ("IntersectionObserver" in window) {
 
     const revealObserver = new IntersectionObserver(
         (entries, observer) => {
@@ -143,10 +165,6 @@ if ("IntersectionObserver" in window) {
 /* =========================================
    6. ACCESSIBILITY: REDUCED MOTION
 ========================================= */
-
-const reducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-);
 
 if (reducedMotion.matches) {
 
